@@ -1,0 +1,56 @@
+<div ng-controller="searchFormController">
+    <div>
+        <h2>Specify your search:</h2>
+        <p>You may fill out as many of the following filter as you wish</p>
+		
+        <table class="table table-bordered table-hover table-striped">
+            <thead>
+				<tr>
+					<th>Category</th>
+					<th>Filter</th>
+					<th width="60%">Query</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="active">
+					<td><h4><strong>Event</strong></h4></td>
+					<td>
+						<select ng-model="correctlySelected"
+						ng-options="opt as opt.label for opt in options">
+						</select>
+					</td>
+					<td>Your event is: {{ correctlySelected.value }}</td>
+				</tr>
+				<tr class="warning">
+					<td><h4>Time(split)</h4></td>
+					<td>
+						<input ng-model="splitTimeMinutes" type="text" value="tt" size="2"> min
+
+						<input ng-model="splitTimeSeconds" type="text" value="00" size="2"> seconds
+
+					</td>
+					<td>The split must be at or under <code>{{splitTimeMinutes}}'{{splitTimeSeconds}}</code></td>
+				</tr>
+
+				<tr class="success">
+					<td><h4>Name</h4></td>
+					<td>
+						<input ng-model="athleteName"
+						type="text">
+						</input>
+					</td>
+					<td>You're searching specifically for <code>{{athleteName | capitalize}}</code></td>
+				</tr>
+				<tr class="danger">
+					<td><h4>Year of Graduation</h4></td>
+					<td>
+						<select ng-model="gradYearField"
+						ng-options="year as year.label for year in years">
+						</select>
+					</td>
+					<td>Athletes who graduate in <code>{{gradYearField.value}}</code></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

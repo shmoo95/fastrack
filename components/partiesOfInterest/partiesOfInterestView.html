@@ -1,0 +1,24 @@
+ <div ng-controller="ListController">
+	<h2 class="poipageheader">Parties of Interest</h2>
+	
+	<ul class="artistlist">
+		<li class="artist cf" ng-repeat="item in artists | filter: query | orderBy: artistOrder:direction" ng-class-odd="'odd'" ng-class-even="'even'">
+                
+			<a href="#/details/{{artists.indexOf(item)}}" >
+				<img ng-src="images/{{item.highschool}}_tn.jpg" alt="Photo of {{item.name}}">
+				
+				<div class="info">
+				
+					<h2>{{item.name}}</h2>
+					<h3>{{item.state}}</h3>
+					
+				</div>
+				
+				<h4>{{item.bestevent}}: '{{item.time}}
+				<button type="button" class="btn btn-lg btn-danger results-btn-right">Not Interested</button>
+				</h4>
+			 </a>
+        </li>
+    </ul>
+	
+</div>

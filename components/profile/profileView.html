@@ -1,0 +1,77 @@
+<!-- Page Heading -->
+<div ng-controller="ProfileDataController as dataCtrl">
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header">
+				{{profile.Name}} <span class="glyphicons glyphicons-ok"></span>
+				<button type="button" class="btn btn-sm btn-info">edit</button>
+				<button type="button" class="btn btn-sm btn-warning">I'm interested</button>
+				<button type="button" class="btn btn-sm btn-success">Interested</button>
+			</h1>
+		</div>
+	</div>
+	<!-- /.row -->
+		
+	<div class="row">
+						
+		<!-- Basic Info -->
+		<div class="col-lg-8 text-center">            
+			<div class="table-responsive">
+				<table class="table table-bordered table-hover table-striped">
+					<thead>
+						<tr>
+							<th colspan="4"><center>Basic Info</center></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="key in notSorted(profile.BasicInfo)" ng-init="value = profile.BasicInfo[key]">
+							<td width="30%" align="right"> {{ key }} </td>
+							<td width="70%"> {{ value }} </td>
+						</tr>                           
+					</tbody>
+				</table>
+			</div>
+		</div>
+		
+		<!-- Profile Picture -->
+		<div class="col-lg-4 text-center">                        
+			<div class="panel-body">
+				<img class="img-thumbnail" ng-src="{{profile.ProfilePic}}" alt="">
+			</div>                       
+		</div>
+		
+	</div>
+	<!-- /.row -->                
+	
+	<div ng-controller="PanelController as PanelCtrl">
+		<section>
+			<!-- Navigation Bar -->
+			<ul class="nav nav-tabs" >
+				<li ng-repeat="(key, value) in notSorted(profile.Statistics)" ng-class="{active:PanelCtrl.isSelected(key)}"> <a href ng-click="PanelCtrl.selectTab(key)">{{ value }}</a> </li>
+			</ul>						 									
+		</section>
+		
+		<div class="panel" ng-repeat="key in notSorted(profile.Statistics)" ng-init="section = profile.Statistics[key]" ng-show="PanelCtrl.isSelected($index)">
+			<div class="row">
+			
+				<div class="jumbotron">
+					<div ng-repeat="key in notSorted(section)" ng-init="table = section[key]">
+						<h2 ng-hide="$first && $last">{{ key }}</h2>
+						<table class="table table-bordered table-hover">
+							<thead>
+								<tr ng-repeat="record in table | limitTo:1">									
+									<th ng-repeat="(key, value) in notSorted(record)" ng-show="!$last">{{ value }}</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="record in table">
+									<td ng-repeat="key in notSorted(record)" ng-init="value = record[key]" ng-show="!$last">{{ value }}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
